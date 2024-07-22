@@ -11,6 +11,7 @@
 		E975D9AA2C49A33800B6E6C6 /* PDFView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975D9A92C49A33800B6E6C6 /* PDFView.swift */; };
 		E975D9AC2C49A43700B6E6C6 /* EmbedderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975D9AB2C49A43700B6E6C6 /* EmbedderView.swift */; };
 		E975D9AE2C49A46100B6E6C6 /* PDFUIKITVIEW.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975D9AD2C49A46100B6E6C6 /* PDFUIKITVIEW.swift */; };
+		E975D9B02C4EF95100B6E6C6 /* PDFVisualizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E975D9AF2C4EF95100B6E6C6 /* PDFVisualizationView.swift */; };
 		E9DE854D2C4838750053388D /* CloudKitSampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DE854C2C4838750053388D /* CloudKitSampleApp.swift */; };
 		E9DE854F2C4838750053388D /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DE854E2C4838750053388D /* ContentView.swift */; };
 		E9DE85512C4838760053388D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9DE85502C4838760053388D /* Assets.xcassets */; };
@@ -24,6 +25,7 @@
 		E975D9A92C49A33800B6E6C6 /* PDFView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFView.swift; sourceTree = "<group>"; };
 		E975D9AB2C49A43700B6E6C6 /* EmbedderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedderView.swift; sourceTree = "<group>"; };
 		E975D9AD2C49A46100B6E6C6 /* PDFUIKITVIEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFUIKITVIEW.swift; sourceTree = "<group>"; };
+		E975D9AF2C4EF95100B6E6C6 /* PDFVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFVisualizationView.swift; sourceTree = "<group>"; };
 		E9DE85492C4838750053388D /* CloudKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9DE854C2C4838750053388D /* CloudKitSampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSampleApp.swift; sourceTree = "<group>"; };
 		E9DE854E2C4838750053388D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				E975D9A92C49A33800B6E6C6 /* PDFView.swift */,
 				E975D9AB2C49A43700B6E6C6 /* EmbedderView.swift */,
 				E975D9AD2C49A46100B6E6C6 /* PDFUIKITVIEW.swift */,
+				E975D9AF2C4EF95100B6E6C6 /* PDFVisualizationView.swift */,
 				E9DE855B2C483A550053388D /* CloudController.swift */,
 				E975D9A62C49A13900B6E6C6 /* Models */,
 				E9DE85502C4838760053388D /* Assets.xcassets */,
@@ -166,6 +169,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E975D9AE2C49A46100B6E6C6 /* PDFUIKITVIEW.swift in Sources */,
+				E975D9B02C4EF95100B6E6C6 /* PDFVisualizationView.swift in Sources */,
 				E9DE854F2C4838750053388D /* ContentView.swift in Sources */,
 				E975D9AC2C49A43700B6E6C6 /* EmbedderView.swift in Sources */,
 				E9DE855C2C483A550053388D /* CloudController.swift in Sources */,
