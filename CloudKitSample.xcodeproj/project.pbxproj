@@ -26,6 +26,7 @@
 		E975D9AB2C49A43700B6E6C6 /* EmbedderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmbedderView.swift; sourceTree = "<group>"; };
 		E975D9AD2C49A46100B6E6C6 /* PDFUIKITVIEW.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFUIKITVIEW.swift; sourceTree = "<group>"; };
 		E975D9AF2C4EF95100B6E6C6 /* PDFVisualizationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PDFVisualizationView.swift; sourceTree = "<group>"; };
+		E975D9D32C518BAD00B6E6C6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		E9DE85492C4838750053388D /* CloudKitSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CloudKitSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E9DE854C2C4838750053388D /* CloudKitSampleApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudKitSampleApp.swift; sourceTree = "<group>"; };
 		E9DE854E2C4838750053388D /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +76,7 @@
 		E9DE854B2C4838750053388D /* CloudKitSample */ = {
 			isa = PBXGroup;
 			children = (
+				E975D9D32C518BAD00B6E6C6 /* Info.plist */,
 				E9DE855A2C4839360053388D /* CloudKitSample.entitlements */,
 				E9DE854C2C4838750053388D /* CloudKitSampleApp.swift */,
 				E9DE854E2C4838750053388D /* ContentView.swift */,
@@ -314,6 +316,8 @@
 				DEVELOPMENT_TEAM = 6KVP348U3Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CloudKitSample/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -344,6 +348,8 @@
 				DEVELOPMENT_TEAM = 6KVP348U3Q;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CloudKitSample/Info.plist;
+				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

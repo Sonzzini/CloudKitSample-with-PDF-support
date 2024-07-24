@@ -185,7 +185,9 @@ class PDFUIKITVIEW: UIViewController, UIDocumentPickerDelegate {
 	}
 	
 	@objc func presentFetchView() {
-		present(PDFVisualizationView(), animated: true)
+		let vc = PDFVisualizationView()
+//		vc.modalPresentationStyle = .fullScreen
+		self.present(vc, animated: true)
 	}
 	
 	func setPdfView() {
