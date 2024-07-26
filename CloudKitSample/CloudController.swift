@@ -43,6 +43,8 @@ class CloudController: ObservableObject {
 
 		// Seria legal saber o que o documento tem de variável não nil pra saber qual campo usar :thumbsup:
 		
+		// Comentário acima foi referente aos testes que estavam sendo realizados. O "Document" poderia possuir campos nil e era necessário realizar a manutenção das linhas de código seguintes
+		
 		documentRecord.setValue(document.data, forKey: "data")
 		documentRecord.setValue(document.title, forKey: "title")
 		documentRecord.setValue(Date.now, forKey: "createdAt")
@@ -144,6 +146,7 @@ class CloudController: ObservableObject {
 		}
 	}
 	
+	// MARK: Função de exemplo.
 	func saveEmily() {
 		let emilyRecord = CKRecord(recordType: "Emily")
 		emilyRecord.setValue("Emily", forKey: "Nome")

@@ -73,7 +73,7 @@ class PDFVisualizationView: UIViewController, UIDocumentPickerDelegate {
 	@objc func getPDF() {
 		Task {
 			let documents = cc.getAllDocuments
-			let document = await documents().last!
+			let document = await documents().last! // MARK: NÃo faço ideia do porque eu preciso chamar documents em "documents()"
 			self.currentDocument = document
 			print(currentDocument?.title)
 			let url = document.data?.fileURL!
@@ -94,7 +94,7 @@ class PDFVisualizationView: UIViewController, UIDocumentPickerDelegate {
 	}
 	
 	@objc func didDownloadPDF() {
-		//		ShareLink em SwiftUI
+//		ShareLink em SwiftUI
 		if let pdfURL = self.pdfView.document?.documentURL {
 			let fileManager = FileManager.default
 			
@@ -132,10 +132,10 @@ class PDFVisualizationView: UIViewController, UIDocumentPickerDelegate {
 					try pdfData?.write(to: actualPath, options: [.atomic])
 					
 					// MARK: abre o aplicativo Files
-					//					let path = self.getDocumentsDirectory().absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://")
-					//					let documentURL = URL(string: path)!
-					//
-					//					UIApplication.shared.open(documentURL)
+//					let path = self.getDocumentsDirectory().absoluteString.replacingOccurrences(of: "file://", with: "shareddocuments://")
+//					let documentURL = URL(string: path)!
+//
+//					UIApplication.shared.open(documentURL)
 					
 					let docPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0] as String
 					let docURL = NSURL(fileURLWithPath: docPath)
@@ -181,7 +181,7 @@ class PDFVisualizationView: UIViewController, UIDocumentPickerDelegate {
 }
 
 extension PDFVisualizationView {
-	func getDocumentsDirectory() -> URL {  // returns your application folder
+	func getDocumentsDirectory() -> URL {  // Devolve a sua pasta de documents da aplicação
 		let paths = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
 		let documentsDirectory = paths[0]
 		return documentsDirectory

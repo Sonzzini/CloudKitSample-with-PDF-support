@@ -64,6 +64,7 @@ class Document: Identifiable {
 		self.title = title
 	}
 	
+	// MARK: Esse init é o que está sendo utilizado, os outros funcionaram para teste
 	init?(asset: CKAsset, title: String) {
 		self.data = asset
 		self.title = title
@@ -77,6 +78,7 @@ class Document: Identifiable {
 		self.data = nil
 	}
 	
+	// MARK: Esse também é utilizado para criar um Document a partir de uma CKRecord request do CloudKit
 	init?(_ record: CKRecord) {
 		guard
 			let data = record[DocumentFields.data.rawValue] as? CKAsset,
