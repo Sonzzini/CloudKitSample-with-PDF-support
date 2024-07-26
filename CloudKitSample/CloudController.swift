@@ -45,6 +45,7 @@ class CloudController: ObservableObject {
 		
 		documentRecord.setValue(document.data, forKey: "data")
 		documentRecord.setValue(document.title, forKey: "title")
+		documentRecord.setValue(Date.now, forKey: "createdAt")
 		
 		do {
 			let savedRecord = try await publicDatabase.save(documentRecord)
@@ -57,7 +58,7 @@ class CloudController: ObservableObject {
 	func getAllDocuments() async -> [Document] {
 		let query = CKQuery(recordType: "DocumentType2", predicate: NSPredicate(format: "TRUEPREDICATE"))
 		
-		query.sortDescriptors = [NSSortDescriptor(key: "title", ascending: true)]
+		query.sortDescriptors = [NSSortDescriptor(key: "createdAt", ascending: true)]
 		
 		do {
 			let result = try await publicDatabase.records(matching: query)

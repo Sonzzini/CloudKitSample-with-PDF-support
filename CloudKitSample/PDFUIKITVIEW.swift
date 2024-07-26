@@ -152,12 +152,23 @@ class PDFUIKITVIEW: UIViewController, UIDocumentPickerDelegate {
 	}
 	@objc func saveDoc() {
 		
-		if let doc = self.doc {
-				Task {
-					await cc.saveDocument(document: doc)
-				}
-		}
+		let alert = UIAlertController(title: "Enviar PDF", message: "Dê um nome ao arquivo", preferredStyle: .alert)
+		alert.addTextField()
 		
+		let submitAction = UIAlertAction(title: "Enviar", style: .default) { [unowned alert] _ in
+			let answer = alert.textFields![0]
+			if let doc = self.doc {
+					Task {
+						doc.title = answer.text ?? ""
+						await self.cc.saveDocument(document: doc)
+					}
+			}
+		}
+		let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel)
+		
+		alert.addAction(submitAction)
+		alert.addAction(cancelAction)
+		self.present(alert, animated: true)
 	}
 	
 	func setImageView() {
@@ -220,7 +231,15 @@ extension PDFUIKITVIEW {
 		
 		let pdfAsset = CKAsset(fileURL: url)
 		
-		self.doc = Document(asset: pdfAsset, title: "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+		var metadata = document.documentAttributes!
+		
+		if let pdfTitle = metadata[PDFDocumentAttribute.titleAttribute] as? String {
+			self.doc = Document(asset: pdfAsset, title: pdfTitle)
+		} else {
+			self.doc = Document(asset: pdfAsset, title: "DocumentTitle")
+		}
+		
+		
 	}
 	
 	func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
