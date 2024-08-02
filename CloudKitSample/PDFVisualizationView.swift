@@ -73,7 +73,7 @@ class PDFVisualizationView: UIViewController, UIDocumentPickerDelegate {
 	@objc func getPDF() {
 		Task {
 			let documents = cc.getAllDocuments
-			let document = await documents().last! // MARK: NÃo faço ideia do porque eu preciso chamar documents em "documents()"
+			let document = await documents().first! // MARK: NÃo faço ideia do porque eu preciso chamar documents em "documents()"
 			self.currentDocument = document
 			print(currentDocument?.title)
 			let url = document.data?.fileURL!

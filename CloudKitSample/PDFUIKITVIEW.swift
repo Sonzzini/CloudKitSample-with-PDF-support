@@ -231,12 +231,16 @@ extension PDFUIKITVIEW {
 		
 		let pdfAsset = CKAsset(fileURL: url)
 		
-		var metadata = document.documentAttributes!
+		let metadata = document.documentAttributes!
+		
+		let filePath = url.path()
 		
 		if let pdfTitle = metadata[PDFDocumentAttribute.titleAttribute] as? String {
-			self.doc = Document(asset: pdfAsset, title: pdfTitle)
+//			self.doc = Document(asset: pdfAsset, title: pdfTitle)
+			self.doc = Document(imagePath: filePath, title: pdfTitle)
 		} else {
-			self.doc = Document(asset: pdfAsset, title: "DocumentTitle")
+//			self.doc = Document(asset: pdfAsset, title: "DocumentTitle")
+			self.doc = Document(imagePath: filePath, title: "DocumentTitle")
 		}
 		
 		

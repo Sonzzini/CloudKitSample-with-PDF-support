@@ -9,59 +9,37 @@ import Foundation
 import CloudKit
 import UIKit
 
-class Document: Identifiable {
+class Document: Identifiable, Codable {
+	
+	enum CodingKeys: CodingKey {
+		case imagePath
+		case title
+	}
+	
+	required init(from decoder: Decoder) throws {
+		let container = try decoder.container(keyedBy: CodingKeys.self)
+		title = try container.decode(String.self, forKey: .title)
+		imagePath = try container.decode(String.self, forKey: .imagePath)
+	}
+	
+	func encode(to encoder: any Encoder) throws {
+		var container = encoder.container(keyedBy: CodingKeys.self)
+		try container.encode(title, forKey: .title)
+		try container.encode(imagePath, forKey: .imagePath)
+	}
+	
 	let id = UUID()
 	var data: CKAsset?
-	var images: [CKAsset]?
+	var imagePath: String?
 	var title: String
 	var record: CKRecord?
-	var bytes: Data?
 
-	init(pdfURL: URL, title: String) {
+	init(pdfURL: URL, title: String, imagePath: String? = nil) {
 		let asset = CKAsset(fileURL: pdfURL)
 		self.data = asset
 		self.title = title
+		self.imagePath = imagePath
 		self.record = nil
-	}
-	
-	init?(URLS: [URL], title: String) {
-		var assets: [CKAsset] = []
-		for url in URLS {
-			let asset = CKAsset(fileURL: url)
-			assets.append(asset)
-		}
-		
-		self.images = assets
-		self.title = title
-	}
-	
-	init?(images: [UIImage], title: String) {
-		var imagesToBeSaved: [CKAsset] = []
-		
-		for image in images {
-			let data = image.pngData()
-			
-			let randID = CloudController.getID()
-
-			let url = FileManager.default.urls(for: .cachesDirectory, in: .userDomainMask).first?.appendingPathComponent("PDFdocument\(randID)", conformingTo: .pdf)
-			do {
-				try data!.write(to: url!)
-			} catch {
-				print("Error! \(error)")
-			}
-			
-			imagesToBeSaved.append(CKAsset(fileURL: url!))
-			
-//			do {
-//				try FileManager.default.removeItem(at: url!)
-//			} catch {
-//				print("Error deleting temp file: \(error)")
-//			}
-		}
-		print(imagesToBeSaved)
-		
-		self.images = imagesToBeSaved
-		self.title = title
 	}
 	
 	// MARK: Esse init é o que está sendo utilizado, os outros funcionaram para teste
@@ -71,11 +49,9 @@ class Document: Identifiable {
 		self.record = nil
 	}
 	
-	init?(bytes: Data, title: String) {
-		self.bytes = bytes
+	init?(imagePath: String, title: String) {
+		self.imagePath = imagePath
 		self.title = title
-		self.record = nil
-		self.data = nil
 	}
 	
 	// MARK: Esse também é utilizado para criar um Document a partir de uma CKRecord request do CloudKit
