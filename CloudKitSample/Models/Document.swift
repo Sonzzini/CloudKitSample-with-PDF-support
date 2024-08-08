@@ -33,14 +33,15 @@ class Document: Identifiable, Codable {
 	var imagePath: String?
 	var title: String
 	var record: CKRecord?
+	var bytes: Data?
 
-	init(pdfURL: URL, title: String, imagePath: String? = nil) {
-		let asset = CKAsset(fileURL: pdfURL)
-		self.data = asset
-		self.title = title
-		self.imagePath = imagePath
-		self.record = nil
-	}
+//	init(pdfURL: URL, title: String, imagePath: String? = nil) {
+//		let asset = CKAsset(fileURL: pdfURL)
+//		self.data = asset
+//		self.title = title
+//		self.imagePath = imagePath
+//		self.record = nil
+//	}
 	
 	// MARK: Esse init é o que está sendo utilizado, os outros funcionaram para teste
 	init?(asset: CKAsset, title: String) {
@@ -49,19 +50,28 @@ class Document: Identifiable, Codable {
 		self.record = nil
 	}
 	
-	init?(imagePath: String, title: String) {
+	init?(imagePath: String, title: String, data: Data? = nil) {
 		self.imagePath = imagePath
 		self.title = title
+		self.bytes = data
 	}
 	
 	// MARK: Esse também é utilizado para criar um Document a partir de uma CKRecord request do CloudKit
 	init?(_ record: CKRecord) {
 		guard
-			let data = record[DocumentFields.data.rawValue] as? CKAsset,
 			let title = record[DocumentFields.title.rawValue] as? String
-		else { return nil }
+		else {
+			print("Failed initializing")
+			return nil
+		}
 		
-		self.data = data
+		if let data = record[DocumentFields.data.rawValue] as? CKAsset {
+			self.data = data
+		}
+		if let bytes = record[DocumentFields.bytes.rawValue] as? Data {
+			self.bytes = bytes
+		}
+		
 		self.title = title
 		self.record = record
 	}
@@ -70,4 +80,5 @@ class Document: Identifiable, Codable {
 enum DocumentFields: String {
 	case data
 	case title
+	case bytes
 }

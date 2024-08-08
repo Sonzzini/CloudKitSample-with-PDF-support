@@ -12,7 +12,6 @@ import CloudKit
 
 class PDFUIKITVIEW: UIViewController, UIDocumentPickerDelegate {
 	
-	let cc = CloudController()
 	var doc: Document? = nil
 	var urls: [URL]? = nil
 	
@@ -159,8 +158,10 @@ class PDFUIKITVIEW: UIViewController, UIDocumentPickerDelegate {
 			let answer = alert.textFields![0]
 			if let doc = self.doc {
 					Task {
+						var cc: CloudController? = CloudController()
 						doc.title = answer.text ?? ""
-						await self.cc.saveDocument(document: doc)
+						await cc?.saveDocument(document: doc)
+						cc = nil
 					}
 			}
 		}
@@ -233,14 +234,27 @@ extension PDFUIKITVIEW {
 		
 		let metadata = document.documentAttributes!
 		
-		let filePath = url.path()
+		_ = document.dataRepresentation()
+//		let convertedData = cc.convert64EncodedToHex(data!)
+//		
+//		let key = CloudController.shared.key
+//		let encryptedData = cc.encrypt(data: data!, using: key)
+//		
+//		let decryptedData = cc.decrypt(data: encryptedData!, using: key)
+		
+//		print(data)
+//		print(encryptedData)
+//		print(decryptedData)
+//		print(data?.base64EncodedString())
+		
+		_ = url.path()
 		
 		if let pdfTitle = metadata[PDFDocumentAttribute.titleAttribute] as? String {
-//			self.doc = Document(asset: pdfAsset, title: pdfTitle)
-			self.doc = Document(imagePath: filePath, title: pdfTitle)
+			self.doc = Document(asset: pdfAsset, title: pdfTitle)
+//			self.doc = Document(imagePath: filePath, title: pdfTitle, data: data) // MARK: Dados encriptados não estão sendo enviados
 		} else {
-//			self.doc = Document(asset: pdfAsset, title: "DocumentTitle")
-			self.doc = Document(imagePath: filePath, title: "DocumentTitle")
+			self.doc = Document(asset: pdfAsset, title: "DocumentTitle")
+//			self.doc = Document(imagePath: filePath, title: "DocumentTitle", data: data)
 		}
 		
 		
@@ -248,45 +262,5 @@ extension PDFUIKITVIEW {
 	
 	func documentPickerWasCancelled(_ controller: UIDocumentPickerViewController) {
 		dismiss(animated: true)
-	}
-	
-	func getTempFileURL() -> URL {
-		let fileManager = FileManager.default
-		
-		let id = UUID()
-		
-		let range = fileManager.urls(for: .documentDirectory, in: .userDomainMask).count
-		
-		let randomNum = Int.random(in: 0..<range)
-		
-		let path = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[randomNum].appendingPathComponent("\(id)")
-		
-		return path
-	}
-	
-	func convertPDFToImages(pdfURL: URL) -> [UIImage]? {
-		guard let pdfDocument = PDFDocument(url: pdfURL) else { return nil }
-		
-		var images: [UIImage] = []
-		
-		for pageNum in 0..<pdfDocument.pageCount {
-			if let pdfPage = pdfDocument.page(at: pageNum) {
-				let pdfPageSize = pdfPage.bounds(for: .mediaBox)
-				let renderer = UIGraphicsImageRenderer(size: pdfPageSize.size)
-				
-				let image = renderer.image { ctx in
-					UIColor.white.set()
-					ctx.fill(pdfPageSize)
-					ctx.cgContext.translateBy(x: 0.0, y: pdfPageSize.size.height)
-					ctx.cgContext.scaleBy(x: 1.0, y: -1.0)
-					
-					pdfPage.draw(with: .mediaBox, to: ctx.cgContext)
-				}
-				
-				images.append(image)
-			}
-		}
-		
-		return images
 	}
 }
